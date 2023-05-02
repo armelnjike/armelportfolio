@@ -1,18 +1,35 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Navbar.scss'
 import { images } from '../../constants'
 import { Skills } from '../../containers'
 import { HiMenuAlt4, HiX} from 'react-icons/hi'
 import { motion} from 'framer-motion'
 
+import { urlFor, client } from '../../client'
+
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
+  const [profile, setProfile] = useState([])
+
+  useEffect(() => {
+  const query = '*[_type == "profile"]';
+
+  client.fetch(query).then((data) => {
+    setProfile(data);
+  });
+
+})
+
+
   return (
     <nav className='app__navbar'>
       <div className='app__navbar-logo'>
-        <img src={images.about01} alt=' no internet connxion' />
+      { profile?.map((item) => (
+        <img src={ urlFor(item.logo) } alt='logo' style={{width:'60px',height:'60px', borderRadius:'50%'}} />
+      )) }
+        
       </div>
       <ul className='app__navbar-links'>
         {['home', 'about','education','skills','certification','works','contact'].map((item)=>(

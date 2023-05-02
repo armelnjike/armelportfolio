@@ -1,32 +1,53 @@
-import React from "react";
-import { motion } from "framer-motion";
 import { images } from "../../../constants";
 import Typical from "react-typical";
 import "./Profile.css";
 
+import React, { useState, useEffect } from 'react'
+import { animate, motion } from 'framer-motion'
+import { Tooltip as ReactTooltip} from 'react-tooltip';
+
+import { MotionWrap } from '../../../wrapper';
+import { AppWrap } from '../../../wrapper'
+import { urlFor, client } from '../../../client'
+
+
 export default function Profile() {
+const [profile, setProfile] = useState([])
+
+useEffect(() => {
+  const query = '*[_type == "profile"]';
+
+  client.fetch(query).then((data) => {
+    setProfile(data);
+  });
+
+})
+
+
   return (
     <div className="profile-container">
       <div className="profile-parent">
         <div className="profile-details">
+
           <div className="colz">
+          {profile?.map((item) => (
             <div className="colz-icon">
-              <a href="#">
+              <a href= {item.facebook}>
                 <i className="fa fa-facebook-square"></i>
               </a>
-              <a href="#">
-                <i className="fa fa-google-plus-square"></i>
-              </a>
-              <a href="#">
+              
+              <a href={item.instagram}>
                 <i className="fa fa-instagram"></i>
               </a>
-              <a href="#">
+              <a href={item.youtube}>
                 <i className="fa fa-youtube-square"></i>
               </a>
-              <a href="#">
+              <a href={item.tweeter}>
                 <i className="fa fa-twitter-square"></i>
               </a>
             </div>
+          ))}
+            
 
             <div className="profile-details-name">
             <motion.div
@@ -43,10 +64,9 @@ export default function Profile() {
                 {""}
                 Hello, I'm 
                 </p>
-                <h1 className="head-text highlighted-text">Armel Njike</h1>
-                
-              
-              
+                { profile?.map((item) => (
+                  <h1 className="head-text highlighted-text"> {item.nomPrenom} </h1>
+                  )) }
 
                 </div>
               </div>
@@ -78,7 +98,10 @@ export default function Profile() {
                   />
                 </h1>
                 <span className="profile-role-tagline">
-                  Knack of building software with front and back operations ...
+                { profile?.map((item) => (
+                   item.aboutMeText
+                  )) }
+                  
                 </span>
               </span>
             </div>
@@ -93,9 +116,12 @@ export default function Profile() {
             </div>
           </div> 
           <div className="profile-picture">
-            <div className="profile-picture-background">
-            
+          { profile?.map((item) => (
+            <div className="profile-picture-background" style={{backgroundImage :`url(${urlFor(item.profileImg)})`}}>
             </div>
+          )) }
+             
+           
           </div>
         
       </div>

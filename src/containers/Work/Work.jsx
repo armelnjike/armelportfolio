@@ -93,7 +93,10 @@ const Work = () => {
                     transition= {{ duration: 0.25 }}
                     className = "app__flex"
                    >
-                    <AiFillGithub />
+                   
+                   <AiFillGithub />
+                   
+                    
                   </motion.div>
 
                 </a>

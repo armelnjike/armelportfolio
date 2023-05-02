@@ -29,6 +29,7 @@ import { MDBContainer, MDBIcon } from "mdb-react-ui-kit";
 
 import 'react-vertical-timeline-component/style.min.css';
 
+
 const Certifications = () => {
 const [Certif, setCertif] = useState([])
 useEffect(() => {
