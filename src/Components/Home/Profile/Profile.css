@@ -32,14 +32,16 @@
 {
     font-size: 40px;
     font-family: cursive;
+    color: var(--dark-orange);
 }
+
 .primary-text
 {
     color: var(--white);
 }
 .highlighted-text
 {
-    color: var(--dark-orange);
+    color: var(--dark-orange) ;
 }
 .profile-role-tagline
 {

@@ -27,11 +27,11 @@ import Typography from '@mui/material/Typography';
 
 import { MDBContainer, MDBIcon } from "mdb-react-ui-kit";
 
-import 'react-vertical-timeline-component/style.min.css';
+//import 'react-vertical-timeline-component/style.min.css';
 
 
 const Certifications = () => {
-const [Certif, setCertif] = useState([])
+const [certif, setCertif] = useState([])
 useEffect(() => {
   const query = '*[_type == "certification"]';
 
@@ -46,7 +46,7 @@ useEffect(() => {
     <h2 className="head-text">My <span> Certifications</span></h2>
       <MDBContainer className="py-5">
       <ul className="timeline-with-icons">
-      {  Certif?.map((item) => (
+      {  certif?.map((item) => (
         <li className="timeline-item mb-5">
           <span className="timeline-icon">
             <img src={ urlFor(item.institutionImg) } alt='intitution'  style={{ width: '70px'}}/>
@@ -58,11 +58,23 @@ useEffect(() => {
             {item.description}
           </p>
           
-          <div style={{width:'50%',marginTop:'15px'}}>
+          
+          <div className='veriverif'>
+
+          <div>
+          {item.state}
+          </div>
+          <div>
+
+            {(item.state === "succeed")?
+              <a href={item.view} ><button className='btn highlighted-btn nnew'>View certificate</button></a>:""
+             }
+          </div>
+            
+          </div>
+            
+          <div style={{width:'50%',marginTop:'15px',margin:'auto'}}>
           <hr />
-          <p >
-            {item.state}
-          </p>
           </div>
           
         </li>

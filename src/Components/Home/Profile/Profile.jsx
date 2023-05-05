@@ -10,7 +10,7 @@ import { MotionWrap } from '../../../wrapper';
 import { AppWrap } from '../../../wrapper'
 import { urlFor, client } from '../../../client'
 
-
+import Typewriter from 'typewriter-effect'
 export default function Profile() {
 const [profile, setProfile] = useState([])
 
@@ -76,26 +76,22 @@ useEffect(() => {
             </div>
             </div>
             <div className="profile-details-role">
-              <span className="primary-text">
+              <span className="primary-text" >
                 {""}
-                <h1>
-                  <Typical
-                    loop={Infinity}
-                    steps={[
-                      "Passionate Dev",
-                      1500,
-                      "Full Stack Developper",
-                      1000,
-                      "Mobile Dev",
-                      1000,
-                      "UIX & Graphic Designer",
-                      1000,
-                      "Data-Scientist & IA Enthusiastic",
-                      1500,
-                      "Trainer",
-                      1000,
-                    ]}
+                <h1 style={{marginBottom:'100px'}}>
+                  <Typewriter 
+                    onInit={(typewriter) => {
+                      typewriter.typeString("Passionated Dev").pauseFor(500).deleteAll()
+                      .typeString("Full Stack Developper").pauseFor(500).deleteAll()
+                      .typeString("Mobile Dev").pauseFor(500).deleteAll()
+                      .typeString("UIX , Graphic Designer").pauseFor(500).deleteAll()
+                      .typeString("Data Scientist").pauseFor(500).deleteAll()
+                      .typeString("AI Antusiastic").pauseFor(500).deleteAll()
+                      .typeString("Trainer").pauseFor(500).deleteAll()
+                      .start();
+                    }}
                   />
+                  
                 </h1>
                 <span className="profile-role-tagline">
                 { profile?.map((item) => (
